@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #아킬레스 { background-color: skyblue; }
+            #거북이 { background-color: green; top: 60px;}
+            #흐른시간 { top: 40px; }
+            #아킬레스, #거북이 {
+                position: absolute;
+                width: 70px;
+                text-align: center;
+                font-size: 15px;
+            }
+            #둘사이의거리, #흐른시간 {
+                position: absolute;
+                right: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id=아킬레스>아킬레스<br>(<span id=아킬레스거리></span>px)</div>
+        <div id=거북이>거북이<br>(<span id=거북이거리></span>px)</div>
+        <div id=둘사이의거리>둘 사이의 거리: <span id=둘사이거리>0</span>px</div>
+        <div id=흐른시간>흐른 시간: <span id=시간>0</span>초</div>
+    </body>
+    <script>
+        let 흐른시간 = 0.0;
+        let 아킬레스x좌표 = 0;
+        let 거북이x좌표 = 100;
+        let x = [];
+        let y = [];
+        const dom = {
+            아킬레스: document.querySelector("#아킬레스"),
+            거북이: document.querySelector("#거북이"),
+            둘사이거리: document.querySelector("#둘사이거리"),
+            시간: document.querySelector("#시간"),
+            아킬레스거리: document.querySelector("#아킬레스거리"),
+            거북이거리: document.querySelector("#거북이거리"),
+        };
+        dom.아킬레스.style.left = "0px";
+        dom.거북이.style.left = "100px";
+        const func = setInterval(() => {
+            흐른시간 += 0.5;
+            아킬레스x좌표 += 10;
+            dom.아킬레스.style.left = `${아킬레스x좌표}px`;
+            dom.아킬레스거리.textContent = `${아킬레스x좌표}`;
+            거북이x좌표 += 1;
+            dom.거북이.style.left = `${거북이x좌표}px`;
+            dom.거북이거리.textContent = `${거북이x좌표}`;
+            dom.둘사이거리.textContent = `${거북이x좌표 - 아킬레스x좌표}`;
+            dom.시간.textContent = `${흐른시간}`;
+            x.push(흐른시간);
+            y.push(거북이x좌표 - 아킬레스x좌표);
+            console.clear();
+            console.log(x);
+            console.log(y);
+            if(흐른시간 === 60) {
+                clearInterval(func);
+            }
+        }, 500);
+    </script>
+</html>
